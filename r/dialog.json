@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dialog",
+  "type": "registry:ui",
+  "title": "Dialog",
+  "description": "A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "overlay"
+  ],
+  "dependencies": [
+    "@rn-primitives/dialog@1.5.2",
+    "lucide-react-native@1.34.0",
+    "react-native-reanimated@4.5.1",
+    "react-native-screens@4.26.2"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/native-only-animated-view.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/dialog.tsx",
+      "type": "registry:ui",
+      "content": "// Vendored from React Native Reusables (nativewind registry), imports rewritten\n// for this project's paths. Treat it as ours now: the registry copies code in,\n// it does not stay a dependency.\nimport * as DialogPrimitive from '@rn-primitives/dialog';\nimport { X } from 'lucide-react-native';\nimport * as React from 'react';\nimport { Platform, Text, View, type GestureResponderEvent, type ViewProps } from 'react-native';\nimport { FadeIn, FadeOut, ReduceMotion } from 'react-native-reanimated';\nimport { FullWindowOverlay as RNFullWindowOverlay } from 'react-native-screens';\n\nimport { cn } from '@/lib/utils';\n\nimport { Icon } from './icon';\nimport { NativeOnlyAnimatedView } from './native-only-animated-view';\n\nconst Dialog = DialogPrimitive.Root;\n\nconst DialogTrigger = DialogPrimitive.Trigger;\n\nconst DialogPortal = DialogPrimitive.Portal;\n\nconst DialogClose = DialogPrimitive.Close;\n\nconst FullWindowOverlay = Platform.OS === 'ios' ? RNFullWindowOverlay : React.Fragment;\n\nfunction DialogOverlay({\n  className,\n  children,\n  onPress,\n  ...props\n}: Omit<React.ComponentProps<typeof DialogPrimitive.Overlay>, 'asChild'> & {\n  children?: React.ReactNode;\n}) {\n  const { onOpenChange } = DialogPrimitive.useRootContext();\n\n  function onOverlayPress(event: GestureResponderEvent) {\n    onPress?.(event);\n    if (event.target === event.currentTarget && !event.isDefaultPrevented()) {\n      onOpenChange(false);\n    }\n  }\n\n  return (\n    <FullWindowOverlay>\n      <DialogPrimitive.Overlay\n        className={cn(\n          'absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black/50 p-2',\n          Platform.select({\n            web: 'fixed cursor-default animate-in fade-in-0 [&>*]:cursor-auto',\n          }),\n          className,\n        )}\n        {...props}\n        onPress={Platform.select({ web: onOverlayPress, native: onPress })}\n        asChild={Platform.OS !== 'web'}\n      >\n        <NativeOnlyAnimatedView\n          entering={FadeIn.duration(200).reduceMotion(ReduceMotion.System)}\n          exiting={FadeOut.duration(150).reduceMotion(ReduceMotion.System)}\n          as=\"Pressable\"\n        >\n          <NativeOnlyAnimatedView\n            entering={FadeIn.delay(50).reduceMotion(ReduceMotion.System)}\n            exiting={FadeOut.duration(150).reduceMotion(ReduceMotion.System)}\n          >\n            <>{children}</>\n          </NativeOnlyAnimatedView>\n        </NativeOnlyAnimatedView>\n      </DialogPrimitive.Overlay>\n    </FullWindowOverlay>\n  );\n}\nfunction DialogContent({\n  className,\n  portalHost,\n  children,\n  ...props\n}: React.ComponentProps<typeof DialogPrimitive.Content> & {\n  portalHost?: string;\n}) {\n  return (\n    <DialogPortal hostName={portalHost}>\n      <DialogOverlay>\n        <DialogPrimitive.Content\n          className={cn(\n            'z-50 mx-auto flex w-full max-w-[calc(100%-2rem)] flex-col gap-4 rounded-lg border border-border bg-background p-6 shadow-lg shadow-black/5 sm:max-w-lg',\n            Platform.select({\n              web: 'duration-200 animate-in fade-in-0 zoom-in-95',\n            }),\n            className,\n          )}\n          {...props}\n        >\n          <>{children}</>\n          <DialogPrimitive.Close\n            className={cn(\n              'absolute right-4 top-4 rounded opacity-70 active:opacity-100',\n              Platform.select({\n                web: 'ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 data-[state=open]:bg-accent',\n              }),\n            )}\n            hitSlop={12}\n          >\n            <Icon\n              as={X}\n              className={cn('size-4 shrink-0 text-accent-foreground web:pointer-events-none')}\n            />\n            <Text className=\"sr-only\">Close</Text>\n          </DialogPrimitive.Close>\n        </DialogPrimitive.Content>\n      </DialogOverlay>\n    </DialogPortal>\n  );\n}\n\nfunction DialogHeader({ className, ...props }: ViewProps) {\n  return (\n    <View className={cn('flex flex-col gap-2 text-center sm:text-left', className)} {...props} />\n  );\n}\n\nfunction DialogFooter({ className, ...props }: ViewProps) {\n  return (\n    <View\n      className={cn('flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', className)}\n      {...props}\n    />\n  );\n}\n\nfunction DialogTitle({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) {\n  return (\n    <DialogPrimitive.Title\n      className={cn('text-lg font-semibold leading-none text-foreground', className)}\n      {...props}\n    />\n  );\n}\n\nfunction DialogDescription({\n  className,\n  ...props\n}: React.ComponentProps<typeof DialogPrimitive.Description>) {\n  return (\n    <DialogPrimitive.Description\n      className={cn('text-sm text-muted-foreground', className)}\n      {...props}\n    />\n  );\n}\n\nexport {\n  Dialog,\n  DialogClose,\n  DialogContent,\n  DialogDescription,\n  DialogFooter,\n  DialogHeader,\n  DialogOverlay,\n  DialogPortal,\n  DialogTitle,\n  DialogTrigger,\n};\n"
+    }
+  ],
+  "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+  "meta": {
+    "surface": "native"
+  }
+}

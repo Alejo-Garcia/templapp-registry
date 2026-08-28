@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "otp-input",
+  "type": "registry:ui",
+  "title": "OTP Input",
+  "description": "A segmented one-time-code field that keeps a single hidden input for the keyboard and autofill.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "form"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/otp-input.tsx",
+      "type": "registry:ui",
+      "content": "import { forwardRef, useRef, useState } from 'react';\nimport { Pressable, TextInput, View } from 'react-native';\n\nimport { cn } from '@/lib/utils';\n\nimport { Text } from './text';\n\nexport interface OtpInputProps {\n  value: string;\n  onChangeText: (value: string) => void;\n  /** Number of digits (default 6). */\n  length?: number;\n  /** Fired once the final digit is entered. */\n  onComplete?: (value: string) => void;\n  autoFocus?: boolean;\n  error?: boolean;\n  disabled?: boolean;\n  /** Announced by screen readers for the (visually hidden) input. */\n  accessibilityLabel?: string;\n  className?: string;\n  testID?: string;\n}\n\n/**\n * Segmented one-time-code input. A single hidden field drives the cells, so\n * native SMS autofill (`textContentType=\"oneTimeCode\"` / `autoComplete=\"sms-otp\"`)\n * works. Controlled via `value` + `onChangeText`.\n */\nexport const OtpInput = forwardRef<TextInput, OtpInputProps>(function OtpInput(\n  {\n    value,\n    onChangeText,\n    length = 6,\n    onComplete,\n    autoFocus,\n    error,\n    disabled,\n    accessibilityLabel = 'Verification code',\n    className,\n    testID,\n  },\n  ref,\n) {\n  const inputRef = useRef<TextInput | null>(null);\n  const [focused, setFocused] = useState(false);\n\n  function setRefs(node: TextInput | null) {\n    inputRef.current = node;\n    if (typeof ref === 'function') ref(node);\n    else if (ref) ref.current = node;\n  }\n\n  function handleChange(next: string) {\n    const digits = next.replace(/\\D/g, '').slice(0, length);\n    onChangeText(digits);\n    // Fire only on the transition into a full code (value holds the prior input),\n    // so editing/re-autofilling an already-complete code doesn't re-trigger it.\n    if (digits.length === length && value.length < length) onComplete?.(digits);\n  }\n\n  return (\n    <Pressable\n      // Decorative wrapper; the hidden TextInput is the real, focusable a11y target.\n      accessible={false}\n      disabled={disabled}\n      onPress={() => inputRef.current?.focus()}\n      // Pin LTR so segment 0 stays on the left even in RTL locales (codes are LTR data).\n      style={{ direction: 'ltr' }}\n      className={cn('flex-row gap-2', className)}\n    >\n      {Array.from({ length }, (_, i) => {\n        const char = value[i] ?? '';\n        const isActive = focused && i === value.length && value.length < length;\n        return (\n          <View\n            key={i}\n            accessibilityElementsHidden\n            importantForAccessibility=\"no-hide-descendants\"\n            className={cn(\n              'h-14 flex-1 items-center justify-center rounded-lg border bg-background',\n              isActive ? 'border-primary' : 'border-input',\n              error && 'border-destructive',\n              disabled && 'opacity-50',\n            )}\n          >\n            <Text className=\"text-2xl font-semibold\">{char}</Text>\n          </View>\n        );\n      })}\n      <TextInput\n        ref={setRefs}\n        testID={testID}\n        accessibilityLabel={accessibilityLabel}\n        accessibilityState={{ disabled: Boolean(disabled) }}\n        value={value}\n        onChangeText={handleChange}\n        onFocus={() => setFocused(true)}\n        onBlur={() => setFocused(false)}\n        keyboardType=\"number-pad\"\n        textContentType=\"oneTimeCode\"\n        autoComplete=\"sms-otp\"\n        autoFocus={autoFocus}\n        editable={!disabled}\n        maxLength={length}\n        caretHidden\n        // Invisible field stretched over the cells; the Pressable focuses it.\n        className=\"absolute h-full w-full opacity-0\"\n      />\n    </Pressable>\n  );\n});\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "type": "registry:ui",
+  "title": "Skeleton",
+  "description": "Use to show a placeholder while content is loading. Holds still when the OS Reduce Motion setting is on.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "feedback"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/use-reduced-motion.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/skeleton.tsx",
+      "type": "registry:ui",
+      "content": "import { useEffect, useState } from 'react';\nimport { Animated, Platform, type ViewProps } from 'react-native';\n\nimport { useReducedMotion } from '@/hooks/use-reduced-motion';\nimport { cn } from '@/lib/utils';\n\ninterface SkeletonProps extends ViewProps {\n  className?: string;\n  /** Set false for a static placeholder (e.g. in tests/snapshots). */\n  animated?: boolean;\n}\n\n// The native animated driver is unavailable on react-native-web (it warns and\n// falls back to JS); opacity animates fine on the JS driver there.\nconst isWeb = Platform.OS === 'web';\n\n/** Placeholder block for loading states, with a gentle pulse. */\nexport function Skeleton({ className, animated = true, style, ...props }: SkeletonProps) {\n  const [opacity] = useState(() => new Animated.Value(0.5));\n  // Respect the OS \"Reduce Motion\" setting — render a still placeholder.\n  const reducedMotion = useReducedMotion();\n  const shouldAnimate = animated && !reducedMotion;\n\n  useEffect(() => {\n    if (!shouldAnimate) return;\n    const loop = Animated.loop(\n      Animated.sequence([\n        Animated.timing(opacity, { toValue: 1, duration: 700, useNativeDriver: !isWeb }),\n        Animated.timing(opacity, { toValue: 0.5, duration: 700, useNativeDriver: !isWeb }),\n      ]),\n    );\n    loop.start();\n    return () => loop.stop();\n  }, [shouldAnimate, opacity]);\n\n  return (\n    <Animated.View\n      className={cn('rounded-md bg-muted', className)}\n      style={[shouldAnimate ? { opacity } : null, style]}\n      {...props}\n    />\n  );\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

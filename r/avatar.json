@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:ui",
+  "title": "Avatar",
+  "description": "An image element with a fallback for representing the user.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "data-display"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/image.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/avatar.tsx",
+      "type": "registry:ui",
+      "content": "import { View } from 'react-native';\n\nimport { cn, getInitials } from '@/lib/utils';\n\nimport { AppImage } from './image';\nimport { Text } from './text';\n\nexport interface AvatarProps {\n  uri?: string | null;\n  name?: string | null;\n  size?: number;\n  className?: string;\n}\n\nexport function Avatar({ uri, name, size = 44, className }: AvatarProps) {\n  return (\n    <View\n      style={{ width: size, height: size, borderRadius: size / 2 }}\n      className={cn('items-center justify-center overflow-hidden bg-secondary', className)}\n    >\n      {uri ? (\n        <AppImage\n          source={{ uri }}\n          style={{ width: size, height: size }}\n          contentFit=\"cover\"\n          recyclingKey={uri}\n        />\n      ) : (\n        <Text className=\"font-semibold text-secondary-foreground\">{getInitials(name)}</Text>\n      )}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

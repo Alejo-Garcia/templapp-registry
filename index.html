@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>templapp registry</title>
+<style>
+  :root { --bg:#fff; --fg:#171717; --mut:#737373; --bd:#e5e5e5; --sub:#fafafa; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0a0a0a; --fg:#fafafa; --mut:#a3a3a3; --bd:#262626; --sub:#171717; } }
+  * { box-sizing:border-box }
+  body { margin:0; padding:3rem 1.25rem 6rem; background:var(--bg); color:var(--fg); font:16px/1.6 ui-sans-serif,system-ui,-apple-system,sans-serif; }
+  main { max-width:56rem; margin:0 auto }
+  h1 { font-size:1.75rem; margin:0 0 .35rem; letter-spacing:-.02em }
+  .lede { color:var(--mut); margin:0 0 2.5rem; max-width:42rem }
+  h2 { font-size:1.05rem; margin:3rem 0 1rem; text-transform:uppercase; letter-spacing:.08em; color:var(--mut) }
+  h2 .c { background:var(--sub); border:1px solid var(--bd); border-radius:999px; padding:.05rem .5rem; font-size:.75rem; letter-spacing:0 }
+  article { border-top:1px solid var(--bd); padding:1.1rem 0 }
+  h3 { font-size:1rem; margin:0 0 .3rem; font-weight:600 }
+  h3 .n { color:var(--mut); font-weight:400; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.85rem }
+  article p { margin:0 0 .7rem; color:var(--mut); font-size:.925rem }
+  pre { margin:0; overflow-x:auto; background:var(--sub); border:1px solid var(--bd); border-radius:.5rem; padding:.6rem .8rem }
+  code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.8rem }
+  .pal { display:flex; flex-wrap:wrap; gap:.5rem; margin:0 0 1rem }
+  .sw { display:flex; align-items:center; gap:.45rem; border:1px solid var(--bd); border-radius:.4rem; padding:.25rem .55rem .25rem .3rem }
+  .sw span { width:1rem; height:1rem; border-radius:.2rem; border:1px solid var(--bd) }
+  .sw code { font-size:.72rem; color:var(--mut) }
+  footer { margin-top:4rem; border-top:1px solid var(--bd); padding-top:1.25rem; color:var(--mut); font-size:.85rem }
+  a { color:inherit }
+</style></head>
+<body><main>
+  <h1>templapp registry</h1>
+  <p class="lede">The design system templapp is built on — React Native Reusables on NativeWind, plus the pieces templapp adds — installable into any Expo project with the shadcn CLI.</p>
+  <div class="pal"><div class="sw"><span style="background:hsl(0 0% 100%)"></span><code>--background</code></div><div class="sw"><span style="background:hsl(0 0% 3.9%)"></span><code>--foreground</code></div><div class="sw"><span style="background:hsl(0 0% 100%)"></span><code>--card</code></div><div class="sw"><span style="background:hsl(0 0% 3.9%)"></span><code>--card-foreground</code></div><div class="sw"><span style="background:hsl(0 0% 100%)"></span><code>--popover</code></div><div class="sw"><span style="background:hsl(0 0% 3.9%)"></span><code>--popover-foreground</code></div><div class="sw"><span style="background:hsl(0 0% 9%)"></span><code>--primary</code></div><div class="sw"><span style="background:hsl(0 0% 98%)"></span><code>--primary-foreground</code></div><div class="sw"><span style="background:hsl(0 0% 96.1%)"></span><code>--secondary</code></div><div class="sw"><span style="background:hsl(0 0% 9%)"></span><code>--secondary-foreground</code></div><div class="sw"><span style="background:hsl(0 0% 96.1%)"></span><code>--muted</code></div><div class="sw"><span style="background:hsl(0 0% 45.1%)"></span><code>--muted-foreground</code></div><div class="sw"><span style="background:hsl(0 0% 96.1%)"></span><code>--accent</code></div><div class="sw"><span style="background:hsl(0 0% 9%)"></span><code>--accent-foreground</code></div><div class="sw"><span style="background:hsl(0 84.2% 60.2%)"></span><code>--destructive</code></div><div class="sw"><span style="background:hsl(0 0% 89.8%)"></span><code>--border</code></div><div class="sw"><span style="background:hsl(0 0% 89.8%)"></span><code>--input</code></div><div class="sw"><span style="background:hsl(0 0% 63%)"></span><code>--ring</code></div><div class="sw"><span style="background:hsl(38 92% 50%)"></span><code>--warning</code></div><div class="sw"><span style="background:hsl(0 0% 100%)"></span><code>--warning-foreground</code></div></div>
+  <section><h2>Tokens <span class="c">1</span></h2>
+        <article>
+          <h3>templapp Tokens <span class="n">tokens</span></h3>
+          <p>The design tokens every component reads: shadcn's token set at React Native Reusables' neutral values, plus a `--warning` semantic for degraded (not failed) states.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/tokens.json</code></pre>
+        </article></section><section><h2>UI <span class="c">51</span></h2>
+        <article>
+          <h3>Accordion <span class="n">accordion</span></h3>
+          <p>A vertically stacked set of interactive headings that each reveal a section of content.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/accordion.json</code></pre>
+        </article>
+        <article>
+          <h3>Alert <span class="n">alert</span></h3>
+          <p>Displays a callout for user attention.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/alert.json</code></pre>
+        </article>
+        <article>
+          <h3>Alert Dialog <span class="n">alert-dialog</span></h3>
+          <p>A modal dialog that interrupts the user with important content and expects a response.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/alert-dialog.json</code></pre>
+        </article>
+        <article>
+          <h3>Aspect Ratio <span class="n">aspect-ratio</span></h3>
+          <p>Displays content within a desired ratio.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/aspect-ratio.json</code></pre>
+        </article>
+        <article>
+          <h3>Avatar <span class="n">avatar</span></h3>
+          <p>An image element with a fallback for representing the user.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/avatar.json</code></pre>
+        </article>
+        <article>
+          <h3>Badge <span class="n">badge</span></h3>
+          <p>Displays a badge or a component that looks like a badge.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/badge.json</code></pre>
+        </article>
+        <article>
+          <h3>Bottom Sheet <span class="n">bottom-sheet</span></h3>
+          <p>A gesture-driven sheet that slides up from the bottom edge, themed to match the app. Wraps @gorhom/bottom-sheet.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/bottom-sheet.json</code></pre>
+        </article>
+        <article>
+          <h3>Button <span class="n">button</span></h3>
+          <p>Displays a button or a component that looks like a button.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/button.json</code></pre>
+        </article>
+        <article>
+          <h3>Button Spinner <span class="n">button-spinner</span></h3>
+          <p>The spinner for a busy Button. Takes its colour from the Button's own text context, so it always matches the label.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/button-spinner.json</code></pre>
+        </article>
+        <article>
+          <h3>Calendar <span class="n">calendar</span></h3>
+          <p>A month grid for picking a single date, with locale-aware weekday and month labels.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/calendar.json</code></pre>
+        </article>
+        <article>
+          <h3>Card <span class="n">card</span></h3>
+          <p>Displays a card with header, content, and footer.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/card.json</code></pre>
+        </article>
+        <article>
+          <h3>Checkbox <span class="n">checkbox</span></h3>
+          <p>A control that allows the user to toggle between checked and not checked.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/checkbox.json</code></pre>
+        </article>
+        <article>
+          <h3>Collapsible <span class="n">collapsible</span></h3>
+          <p>An interactive component that expands and collapses a panel of content.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/collapsible.json</code></pre>
+        </article>
+        <article>
+          <h3>Context Menu <span class="n">context-menu</span></h3>
+          <p>Displays a menu to the user — such as a set of actions or functions — triggered by a long press.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/context-menu.json</code></pre>
+        </article>
+        <article>
+          <h3>Date Picker <span class="n">date-picker</span></h3>
+          <p>A field that opens a calendar in a bottom sheet and formats the chosen date for the active locale.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/date-picker.json</code></pre>
+        </article>
+        <article>
+          <h3>Dialog <span class="n">dialog</span></h3>
+          <p>A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/dialog.json</code></pre>
+        </article>
+        <article>
+          <h3>Dropdown Menu <span class="n">dropdown-menu</span></h3>
+          <p>Displays a menu to the user — such as a set of actions or functions — triggered by a button.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/dropdown-menu.json</code></pre>
+        </article>
+        <article>
+          <h3>Hover Card <span class="n">hover-card</span></h3>
+          <p>For sighted users to preview content available behind a link.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/hover-card.json</code></pre>
+        </article>
+        <article>
+          <h3>Icon <span class="n">icon</span></h3>
+          <p>Renders a Lucide icon with the theme colour and sizing applied through class names.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/icon.json</code></pre>
+        </article>
+        <article>
+          <h3>Image <span class="n">image</span></h3>
+          <p>An expo-image wrapper with sane caching, transition and placeholder defaults.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/image.json</code></pre>
+        </article>
+        <article>
+          <h3>Input <span class="n">input</span></h3>
+          <p>Displays a form input field or a component that looks like an input field.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/input.json</code></pre>
+        </article>
+        <article>
+          <h3>Label <span class="n">label</span></h3>
+          <p>Renders an accessible label associated with controls.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/label.json</code></pre>
+        </article>
+        <article>
+          <h3>List Item <span class="n">list-item</span></h3>
+          <p>A settings-style row with an optional leading icon, supporting text and a chevron, mirrored for RTL.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/list-item.json</code></pre>
+        </article>
+        <article>
+          <h3>Menubar <span class="n">menubar</span></h3>
+          <p>A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/menubar.json</code></pre>
+        </article>
+        <article>
+          <h3>Native Only Animated View <span class="n">native-only-animated-view</span></h3>
+          <p>A component that is only rendered and animated on native platforms.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/native-only-animated-view.json</code></pre>
+        </article>
+        <article>
+          <h3>OTP Input <span class="n">otp-input</span></h3>
+          <p>A segmented one-time-code field that keeps a single hidden input for the keyboard and autofill.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/otp-input.json</code></pre>
+        </article>
+        <article>
+          <h3>Popover <span class="n">popover</span></h3>
+          <p>Displays rich content in a portal, triggered by a button.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/popover.json</code></pre>
+        </article>
+        <article>
+          <h3>Progress <span class="n">progress</span></h3>
+          <p>Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/progress.json</code></pre>
+        </article>
+        <article>
+          <h3>Radio Group <span class="n">radio-group</span></h3>
+          <p>A set of checkable buttons — known as radio buttons — where no more than one of the buttons can be checked at a time.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/radio-group.json</code></pre>
+        </article>
+        <article>
+          <h3>Select <span class="n">select</span></h3>
+          <p>Displays a list of options for the user to pick from — triggered by a button.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/select.json</code></pre>
+        </article>
+        <article>
+          <h3>Separator <span class="n">separator</span></h3>
+          <p>Visually or semantically separates content.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/separator.json</code></pre>
+        </article>
+        <article>
+          <h3>Skeleton <span class="n">skeleton</span></h3>
+          <p>Use to show a placeholder while content is loading. Holds still when the OS Reduce Motion setting is on.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/skeleton.json</code></pre>
+        </article>
+        <article>
+          <h3>Spinner <span class="n">spinner</span></h3>
+          <p>An activity indicator painted with the resolved theme colour.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/spinner.json</code></pre>
+        </article>
+        <article>
+          <h3>Switch <span class="n">switch</span></h3>
+          <p>A control that allows the user to toggle between checked and not checked.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/switch.json</code></pre>
+        </article>
+        <article>
+          <h3>Tabs <span class="n">tabs</span></h3>
+          <p>A set of layered sections of content — known as tab panels — that are displayed one at a time.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/tabs.json</code></pre>
+        </article>
+        <article>
+          <h3>Text <span class="n">text</span></h3>
+          <p>The typographic primitive. Every other component styles its text through this one.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/text.json</code></pre>
+        </article>
+        <article>
+          <h3>Textarea <span class="n">textarea</span></h3>
+          <p>Displays a form textarea or a component that looks like a textarea.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/textarea.json</code></pre>
+        </article>
+        <article>
+          <h3>Toggle <span class="n">toggle</span></h3>
+          <p>A two-state button that can be either on or off.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/toggle.json</code></pre>
+        </article>
+        <article>
+          <h3>Toggle Group <span class="n">toggle-group</span></h3>
+          <p>A set of two-state buttons that can be toggled on or off.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/toggle-group.json</code></pre>
+        </article>
+        <article>
+          <h3>Tooltip <span class="n">tooltip</span></h3>
+          <p>A popup that displays information related to an element when the element receives focus or is pressed.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/tooltip.json</code></pre>
+        </article>
+        <article>
+          <h3>Badge (web) <span class="n">web-badge</span></h3>
+          <p>A small status label. Six variants, sharing the palette's semantics with the native Badge.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/web-badge.json</code></pre>
+        </article>
+        <article>
+          <h3>Button (web) <span class="n">web-button</span></h3>
+          <p>The web Button: same six variants and four sizes as the native one, on Radix's Slot for `asChild`.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/web-button.json</code></pre>
+        </article>
+        <article>
+          <h3>Card (web) <span class="n">web-card</span></h3>
+          <p>A surface with header, content and footer slots.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/web-card.json</code></pre>
+        </article>
+        <article>
+          <h3>Input (web) <span class="n">web-input</span></h3>
+          <p>A single-line text field, with the shared focus ring and invalid states.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/web-input.json</code></pre>
+        </article>
+        <article>
+          <h3>Label (web) <span class="n">web-label</span></h3>
+          <p>A form label wired to Radix, so clicking it focuses the control.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/web-label.json</code></pre>
+        </article>
+        <article>
+          <h3>Select (web) <span class="n">web-select</span></h3>
+          <p>A Radix select with the palette's popover, item and indicator styling.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/web-select.json</code></pre>
+        </article>
+        <article>
+          <h3>Slider (web) <span class="n">web-slider</span></h3>
+          <p>A Radix slider — track, range and thumb on the shared ring and border tokens.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/web-slider.json</code></pre>
+        </article>
+        <article>
+          <h3>Switch (web) <span class="n">web-switch</span></h3>
+          <p>A Radix switch, using `--primary` for on and `--input` for off.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/web-switch.json</code></pre>
+        </article>
+        <article>
+          <h3>Table (web) <span class="n">web-table</span></h3>
+          <p>A data table's parts: header, body, footer, row, head, cell and caption.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/web-table.json</code></pre>
+        </article>
+        <article>
+          <h3>Textarea (web) <span class="n">web-textarea</span></h3>
+          <p>A multi-line field matching Input's focus and invalid states.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/web-textarea.json</code></pre>
+        </article>
+        <article>
+          <h3>Alert Dialog (web) <span class="n">web-alert-dialog</span></h3>
+          <p>A Radix alert dialog with the shared overlay, and Button for its actions.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/web-alert-dialog.json</code></pre>
+        </article></section><section><h2>Components <span class="c">5</span></h2>
+        <article>
+          <h3>Screen <span class="n">screen</span></h3>
+          <p>The page wrapper: safe-area insets, scroll and keyboard avoidance in one place.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/screen.json</code></pre>
+        </article>
+        <article>
+          <h3>Section <span class="n">section</span></h3>
+          <p>A titled group of rows or fields, with the spacing screens are laid out on.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/section.json</code></pre>
+        </article>
+        <article>
+          <h3>Form Field <span class="n">form-field</span></h3>
+          <p>Binds an Input to react-hook-form: label, value, error message and accessibility wiring.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/form-field.json</code></pre>
+        </article>
+        <article>
+          <h3>Empty State <span class="n">empty-state</span></h3>
+          <p>The illustration-plus-message block shown when a list has nothing in it.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/empty-state.json</code></pre>
+        </article>
+        <article>
+          <h3>Error State <span class="n">error-state</span></h3>
+          <p>The message-plus-retry block shown when a screen fails to load.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/error-state.json</code></pre>
+        </article></section><section><h2>Hooks <span class="c">1</span></h2>
+        <article>
+          <h3>useReducedMotion <span class="n">use-reduced-motion</span></h3>
+          <p>Tracks the OS &quot;Reduce Motion&quot; setting so non-essential animation can be gated on it.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/use-reduced-motion.json</code></pre>
+        </article></section><section><h2>Library <span class="c">3</span></h2>
+        <article>
+          <h3>Utils <span class="n">utils</span></h3>
+          <p>The `cn()` class merger every component uses, plus small string helpers.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/utils.json</code></pre>
+        </article>
+        <article>
+          <h3>Theme <span class="n">theme</span></h3>
+          <p>The resolved palette and colour-scheme hooks, for the places that take a colour value instead of a class name — React Navigation, status bar, native props.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/theme.json</code></pre>
+        </article>
+        <article>
+          <h3>Utils (web) <span class="n">web-utils</span></h3>
+          <p>The `cn()` class merger every web component uses.</p>
+          <pre><code>npx shadcn@latest add https://alejo-garcia.github.io/templapp-registry/r/web-utils.json</code></pre>
+        </article></section>
+  <footer>
+    Generated from <code>registry.json</code> · <a href="https://github.com/Alejo-Garcia/templapp">https://github.com/Alejo-Garcia/templapp</a><br>
+    Native packages: run <code>npx expo install --fix</code> after adding anything.
+  </footer>
+</main></body></html>

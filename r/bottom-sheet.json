@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bottom-sheet",
+  "type": "registry:ui",
+  "title": "Bottom Sheet",
+  "description": "A gesture-driven sheet that slides up from the bottom edge, themed to match the app. Wraps @gorhom/bottom-sheet.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "overlay"
+  ],
+  "dependencies": [
+    "@gorhom/bottom-sheet@5.2.14"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/theme.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/bottom-sheet.tsx",
+      "type": "registry:ui",
+      "content": "import {\n  BottomSheetBackdrop,\n  type BottomSheetBackdropProps,\n  BottomSheetModal,\n  type BottomSheetModalProps,\n  BottomSheetView,\n} from '@gorhom/bottom-sheet';\nimport { forwardRef, type ReactNode, useCallback } from 'react';\n\nimport { useThemeColors } from '@/theme';\n\nexport type AppBottomSheetRef = BottomSheetModal;\n\nexport interface AppBottomSheetProps extends Partial<BottomSheetModalProps> {\n  children: ReactNode;\n}\n\n/**\n * Themed wrapper around `BottomSheetModal`. Present it imperatively:\n *\n *   const sheet = useRef<AppBottomSheetRef>(null);\n *   sheet.current?.present();\n *\n * Requires `<BottomSheetModalProvider>` at the app root (wired in app/_layout.tsx).\n */\nexport const AppBottomSheet = forwardRef<BottomSheetModal, AppBottomSheetProps>(\n  function AppBottomSheet({ children, ...props }, ref) {\n    const colors = useThemeColors();\n\n    const renderBackdrop = useCallback(\n      (backdropProps: BottomSheetBackdropProps) => (\n        <BottomSheetBackdrop {...backdropProps} appearsOnIndex={0} disappearsOnIndex={-1} />\n      ),\n      [],\n    );\n\n    return (\n      <BottomSheetModal\n        ref={ref}\n        enableDynamicSizing\n        backdropComponent={renderBackdrop}\n        backgroundStyle={{ backgroundColor: colors.card }}\n        handleIndicatorStyle={{ backgroundColor: colors.mutedForeground }}\n        {...props}\n      >\n        <BottomSheetView style={{ paddingBottom: 24 }}>{children}</BottomSheetView>\n      </BottomSheetModal>\n    );\n  },\n);\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

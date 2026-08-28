@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "utils",
+  "type": "registry:lib",
+  "title": "Utils",
+  "description": "The `cn()` class merger every component uses, plus small string helpers.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "lib"
+  ],
+  "dependencies": [
+    "clsx@2.1.1",
+    "tailwind-merge@3.6.0"
+  ],
+  "files": [
+    {
+      "path": "src/lib/utils.ts",
+      "type": "registry:lib",
+      "content": "import { type ClassValue, clsx } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\n/** Merge Tailwind classes safely (later classes win on conflicts). */\nexport function cn(...inputs: ClassValue[]): string {\n  return twMerge(clsx(inputs));\n}\n\nexport function sleep(ms: number): Promise<void> {\n  return new Promise((resolve) => setTimeout(resolve, ms));\n}\n\nexport function noop(): void {}\n\n/** Best-effort initials for avatar fallbacks. */\nexport function getInitials(name?: string | null): string {\n  if (!name) return '?';\n  const parts = name.trim().split(/\\s+/);\n  const first = parts[0]?.[0] ?? '';\n  const last = parts.length > 1 ? (parts[parts.length - 1]?.[0] ?? '') : '';\n  return (first + last).toUpperCase() || '?';\n}\n\nexport function truncate(value: string, max = 120): string {\n  return value.length > max ? `${value.slice(0, max - 1)}…` : value;\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

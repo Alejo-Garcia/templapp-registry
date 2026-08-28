@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "icon",
+  "type": "registry:ui",
+  "title": "Icon",
+  "description": "Renders a Lucide icon with the theme colour and sizing applied through class names.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "data-display"
+  ],
+  "dependencies": [
+    "lucide-react-native@1.34.0",
+    "nativewind@4.2.6"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/icon.tsx",
+      "type": "registry:ui",
+      "content": "import type { LucideProps } from 'lucide-react-native';\nimport { cssInterop } from 'nativewind';\nimport type { ComponentType } from 'react';\n\ntype LucideComponent = ComponentType<LucideProps>;\n\n// Tracks which icons have been made className-aware (cssInterop mutates them).\nconst interopped = new WeakSet<LucideComponent>();\n\nexport interface IconProps extends LucideProps {\n  /** A lucide icon component, e.g. `as={Home}`. */\n  as: LucideComponent;\n  className?: string;\n}\n\n/**\n * Renders a lucide icon that responds to Tailwind text-color classes.\n * Usage: `<Icon as={Home} className=\"text-muted-foreground\" size={22} />`\n */\nexport function Icon({ as: IconComponent, size = 20, className, ...props }: IconProps) {\n  if (!interopped.has(IconComponent)) {\n    cssInterop(IconComponent, {\n      className: { target: 'style', nativeStyleToProp: { color: true } },\n    });\n    interopped.add(IconComponent);\n  }\n  const Styled = IconComponent as ComponentType<LucideProps & { className?: string }>;\n  return <Styled size={size} className={className} {...props} />;\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

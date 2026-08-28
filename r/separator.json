@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "type": "registry:ui",
+  "title": "Separator",
+  "description": "Visually or semantically separates content.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "layout"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/separator.tsx",
+      "type": "registry:ui",
+      "content": "import { View, type ViewProps } from 'react-native';\n\nimport { cn } from '@/lib/utils';\n\nexport function Separator({ className, ...props }: ViewProps & { className?: string }) {\n  return <View className={cn('h-px w-full bg-border', className)} {...props} />;\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "auth": [
+    "password",
+    "google",
+    "apple"
+  ],
+  "notifications": [
+    "push"
+  ],
+  "payments": [
+    "subscription"
+  ],
+  "analytics": [
+    "product"
+  ],
+  "web": [
+    "compliance_pages",
+    "app_association"
+  ],
+  "version": {
+    "commit": "3216954",
+    "digest": "1316e350ae52",
+    "components": 61
+  }
+}

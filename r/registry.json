@@ -1,0 +1,1750 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "templapp",
+  "homepage": "https://github.com/Alejo-Garcia/templapp",
+  "version": {
+    "commit": "3216954",
+    "digest": "1316e350ae52",
+    "components": 61
+  },
+  "items": [
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tokens",
+      "type": "registry:theme",
+      "title": "templapp Tokens",
+      "description": "The design tokens every component reads: shadcn's token set at React Native Reusables' neutral values, plus a `--warning` semantic for degraded (not failed) states.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "theme"
+      ],
+      "cssVars": {
+        "light": {
+          "background": "0 0% 100%",
+          "foreground": "0 0% 3.9%",
+          "card": "0 0% 100%",
+          "card-foreground": "0 0% 3.9%",
+          "popover": "0 0% 100%",
+          "popover-foreground": "0 0% 3.9%",
+          "primary": "0 0% 9%",
+          "primary-foreground": "0 0% 98%",
+          "secondary": "0 0% 96.1%",
+          "secondary-foreground": "0 0% 9%",
+          "muted": "0 0% 96.1%",
+          "muted-foreground": "0 0% 45.1%",
+          "accent": "0 0% 96.1%",
+          "accent-foreground": "0 0% 9%",
+          "destructive": "0 84.2% 60.2%",
+          "border": "0 0% 89.8%",
+          "input": "0 0% 89.8%",
+          "ring": "0 0% 63%",
+          "radius": "0.625rem",
+          "chart-1": "12 76% 61%",
+          "chart-2": "173 58% 39%",
+          "chart-3": "197 37% 24%",
+          "chart-4": "43 74% 66%",
+          "chart-5": "27 87% 67%",
+          "warning": "38 92% 50%",
+          "warning-foreground": "0 0% 100%"
+        },
+        "dark": {
+          "background": "0 0% 3.9%",
+          "foreground": "0 0% 98%",
+          "card": "0 0% 3.9%",
+          "card-foreground": "0 0% 98%",
+          "popover": "0 0% 3.9%",
+          "popover-foreground": "0 0% 98%",
+          "primary": "0 0% 98%",
+          "primary-foreground": "0 0% 9%",
+          "secondary": "0 0% 14.9%",
+          "secondary-foreground": "0 0% 98%",
+          "muted": "0 0% 14.9%",
+          "muted-foreground": "0 0% 63.9%",
+          "accent": "0 0% 14.9%",
+          "accent-foreground": "0 0% 98%",
+          "destructive": "0 70.9% 59.4%",
+          "border": "0 0% 14.9%",
+          "input": "0 0% 14.9%",
+          "ring": "300 0% 45%",
+          "chart-1": "220 70% 50%",
+          "chart-2": "160 60% 45%",
+          "chart-3": "30 80% 55%",
+          "chart-4": "280 65% 60%",
+          "chart-5": "340 75% 55%",
+          "warning": "38 92% 50%",
+          "warning-foreground": "0 0% 100%"
+        }
+      },
+      "docs": "Adds the token set to your global.css. Pair it with the Tailwind colour mappings in templapp’s tailwind.config.js — tokens alone do nothing until `bg-primary` resolves to `hsl(var(--primary))`.\n\nCheck the dark block after installing: the shadcn CLI writes the dark tokens under `.dark`, but NativeWind toggles the scheme on the root element and needs `.dark:root`. Left as `.dark`, dark mode silently does nothing.",
+      "meta": {
+        "surface": "native"
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "Utils",
+      "description": "The `cn()` class merger every component uses, plus small string helpers.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "lib"
+      ],
+      "dependencies": [
+        "clsx@2.1.1",
+        "tailwind-merge@3.6.0"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "theme",
+      "type": "registry:lib",
+      "title": "Theme",
+      "description": "The resolved palette and colour-scheme hooks, for the places that take a colour value instead of a class name — React Navigation, status bar, native props.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "theme",
+        "lib"
+      ],
+      "dependencies": [
+        "@expo-google-fonts/inter@0.4.2",
+        "expo-router@57.0.17",
+        "nativewind@4.2.6"
+      ],
+      "docs": "`colors.ts` is a second copy of the tokens in hex, because React Navigation and native props take resolved colours rather than class names. templapp keeps the two honest with `src/theme/colors.test.ts`, which parses global.css and converts each token — copy that test too, or the palette will drift the first time you re-theme.\n\nThis item deliberately omits `theme-provider.tsx`: it reads the persisted colour-scheme preference from templapp's `@/data` store, so it only makes sense inside templapp.\n\nRun `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/theme/colors.ts",
+          "type": "registry:file",
+          "target": "src/theme/colors.ts"
+        },
+        {
+          "path": "src/theme/use-color-scheme.ts",
+          "type": "registry:file",
+          "target": "src/theme/use-color-scheme.ts"
+        },
+        {
+          "path": "src/theme/navigation.ts",
+          "type": "registry:file",
+          "target": "src/theme/navigation.ts"
+        },
+        {
+          "path": "src/theme/fonts.ts",
+          "type": "registry:file",
+          "target": "src/theme/fonts.ts"
+        },
+        {
+          "path": "src/theme/index.ts",
+          "type": "registry:file",
+          "target": "src/theme/index.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "use-reduced-motion",
+      "type": "registry:hook",
+      "title": "useReducedMotion",
+      "description": "Tracks the OS \"Reduce Motion\" setting so non-essential animation can be gated on it.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "hook",
+        "accessibility"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/lib/hooks/use-reduced-motion.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "A vertically stacked set of interactive headings that each reveal a section of content.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "disclosure"
+      ],
+      "dependencies": [
+        "@rn-primitives/accordion@1.5.2",
+        "lucide-react-native@1.34.0",
+        "react-native-reanimated@4.5.1"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Displays a callout for user attention.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "lucide-react-native@1.34.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/alert.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "A modal dialog that interrupts the user with important content and expects a response.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "overlay",
+        "feedback"
+      ],
+      "dependencies": [
+        "@rn-primitives/alert-dialog@1.5.2",
+        "react-native-reanimated@4.5.1",
+        "react-native-screens@4.26.2"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/button.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/native-only-animated-view.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "Aspect Ratio",
+      "description": "Displays content within a desired ratio.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "@rn-primitives/aspect-ratio@1.5.2"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/aspect-ratio.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "An image element with a fallback for representing the user.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "data-display"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/image.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Displays a badge or a component that looks like a badge.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "data-display"
+      ],
+      "dependencies": [
+        "@rn-primitives/slot@1.5.2",
+        "class-variance-authority@0.7.1"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "bottom-sheet",
+      "type": "registry:ui",
+      "title": "Bottom Sheet",
+      "description": "A gesture-driven sheet that slides up from the bottom edge, themed to match the app. Wraps @gorhom/bottom-sheet.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "overlay"
+      ],
+      "dependencies": [
+        "@gorhom/bottom-sheet@5.2.14"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/theme.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/bottom-sheet.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Displays a button or a component that looks like a button.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "form",
+        "action"
+      ],
+      "dependencies": [
+        "class-variance-authority@0.7.1"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "button-spinner",
+      "type": "registry:ui",
+      "title": "Button Spinner",
+      "description": "The spinner for a busy Button. Takes its colour from the Button's own text context, so it always matches the label.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "feedback",
+        "form"
+      ],
+      "dependencies": [
+        "lucide-react-native@1.34.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/button-spinner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "A month grid for picking a single date, with locale-aware weekday and month labels.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "date",
+        "form"
+      ],
+      "dependencies": [
+        "date-fns@4.4.0",
+        "lucide-react-native@1.34.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/calendar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Displays a card with header, content, and footer.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "layout"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "A control that allows the user to toggle between checked and not checked.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "form"
+      ],
+      "dependencies": [
+        "@rn-primitives/checkbox@1.5.2",
+        "lucide-react-native@1.34.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "An interactive component that expands and collapses a panel of content.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "disclosure"
+      ],
+      "dependencies": [
+        "@rn-primitives/collapsible@1.5.2"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/collapsible.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a long press.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "overlay",
+        "action"
+      ],
+      "dependencies": [
+        "@rn-primitives/context-menu@1.5.2",
+        "lucide-react-native@1.34.0",
+        "react-native-reanimated@4.5.1",
+        "react-native-screens@4.26.2"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/native-only-animated-view.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/context-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "A field that opens a calendar in a bottom sheet and formats the chosen date for the active locale.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "date",
+        "form"
+      ],
+      "dependencies": [
+        "date-fns@4.4.0",
+        "lucide-react-native@1.34.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/bottom-sheet.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/calendar.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/date-picker.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "overlay"
+      ],
+      "dependencies": [
+        "@rn-primitives/dialog@1.5.2",
+        "lucide-react-native@1.34.0",
+        "react-native-reanimated@4.5.1",
+        "react-native-screens@4.26.2"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/native-only-animated-view.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "overlay",
+        "action"
+      ],
+      "dependencies": [
+        "@rn-primitives/dropdown-menu@1.5.2",
+        "lucide-react-native@1.34.0",
+        "react-native-reanimated@4.5.1",
+        "react-native-screens@4.26.2"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/native-only-animated-view.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "For sighted users to preview content available behind a link.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "overlay"
+      ],
+      "dependencies": [
+        "@rn-primitives/hover-card@1.5.2",
+        "react-native-reanimated@4.5.1",
+        "react-native-screens@4.26.2"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/native-only-animated-view.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/hover-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "icon",
+      "type": "registry:ui",
+      "title": "Icon",
+      "description": "Renders a Lucide icon with the theme colour and sizing applied through class names.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "data-display"
+      ],
+      "dependencies": [
+        "lucide-react-native@1.34.0",
+        "nativewind@4.2.6"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/icon.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "image",
+      "type": "registry:ui",
+      "title": "Image",
+      "description": "An expo-image wrapper with sane caching, transition and placeholder defaults.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "data-display"
+      ],
+      "dependencies": [
+        "expo-image@57.0.3"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/image.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Displays a form input field or a component that looks like an input field.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "form"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Renders an accessible label associated with controls.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "form"
+      ],
+      "dependencies": [
+        "@rn-primitives/label@1.5.2"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/label.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "list-item",
+      "type": "registry:ui",
+      "title": "List Item",
+      "description": "A settings-style row with an optional leading icon, supporting text and a chevron, mirrored for RTL.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "data-display",
+        "navigation"
+      ],
+      "dependencies": [
+        "lucide-react-native@1.34.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/list-item.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "navigation",
+        "action"
+      ],
+      "dependencies": [
+        "@rn-primitives/menubar@1.5.2",
+        "@rn-primitives/portal@1.5.3",
+        "lucide-react-native@1.34.0",
+        "react-native-reanimated@4.5.1",
+        "react-native-screens@4.26.2"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/native-only-animated-view.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "native-only-animated-view",
+      "type": "registry:ui",
+      "title": "Native Only Animated View",
+      "description": "A component that is only rendered and animated on native platforms.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "react-native-reanimated@4.5.1"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/native-only-animated-view.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "otp-input",
+      "type": "registry:ui",
+      "title": "OTP Input",
+      "description": "A segmented one-time-code field that keeps a single hidden input for the keyboard and autofill.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "form"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/otp-input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Displays rich content in a portal, triggered by a button.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "overlay"
+      ],
+      "dependencies": [
+        "@rn-primitives/popover@1.5.2",
+        "react-native-reanimated@4.5.1",
+        "react-native-screens@4.26.2"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/native-only-animated-view.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "@rn-primitives/progress@1.5.2",
+        "react-native-reanimated@4.5.1"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "A set of checkable buttons — known as radio buttons — where no more than one of the buttons can be checked at a time.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "form"
+      ],
+      "dependencies": [
+        "@rn-primitives/radio-group@1.5.2"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/radio-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Displays a list of options for the user to pick from — triggered by a button.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "form",
+        "overlay"
+      ],
+      "dependencies": [
+        "@rn-primitives/select@1.5.2",
+        "lucide-react-native@1.34.0",
+        "react-native-reanimated@4.5.1",
+        "react-native-screens@4.26.2"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/native-only-animated-view.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Visually or semantically separates content.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "layout"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Use to show a placeholder while content is loading. Holds still when the OS Reduce Motion setting is on.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "feedback"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/use-reduced-motion.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "An activity indicator painted with the resolved theme colour.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "feedback"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/theme.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/spinner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "A control that allows the user to toggle between checked and not checked.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "form"
+      ],
+      "dependencies": [
+        "@rn-primitives/switch@1.5.2"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "A set of layered sections of content — known as tab panels — that are displayed one at a time.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "@rn-primitives/tabs@1.5.2"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "text",
+      "type": "registry:ui",
+      "title": "Text",
+      "description": "The typographic primitive. Every other component styles its text through this one.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "typography"
+      ],
+      "dependencies": [
+        "@rn-primitives/slot@1.5.2",
+        "class-variance-authority@0.7.1"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/text.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Displays a form textarea or a component that looks like a textarea.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "form"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "A two-state button that can be either on or off.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "form",
+        "action"
+      ],
+      "dependencies": [
+        "@rn-primitives/toggle@1.5.2",
+        "class-variance-authority@0.7.1"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/toggle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "A set of two-state buttons that can be toggled on or off.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "form",
+        "action"
+      ],
+      "dependencies": [
+        "@rn-primitives/toggle-group@1.5.2",
+        "class-variance-authority@0.7.1"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/toggle.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/toggle-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "A popup that displays information related to an element when the element receives focus or is pressed.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "overlay"
+      ],
+      "dependencies": [
+        "@rn-primitives/tooltip@1.5.2",
+        "react-native-reanimated@4.5.1",
+        "react-native-screens@4.26.2"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/native-only-animated-view.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "screen",
+      "type": "registry:component",
+      "title": "Screen",
+      "description": "The page wrapper: safe-area insets, scroll and keyboard avoidance in one place.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "layout"
+      ],
+      "dependencies": [
+        "react-native-keyboard-controller@1.21.9",
+        "react-native-safe-area-context@5.7.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/screen.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "section",
+      "type": "registry:component",
+      "title": "Section",
+      "description": "A titled group of rows or fields, with the spacing screens are laid out on.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "layout"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/section.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "form-field",
+      "type": "registry:component",
+      "title": "Form Field",
+      "description": "Binds an Input to react-hook-form: label, value, error message and accessibility wiring.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "form"
+      ],
+      "dependencies": [
+        "react-hook-form@7.86.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/input.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/label.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/form-field.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "empty-state",
+      "type": "registry:component",
+      "title": "Empty State",
+      "description": "The illustration-plus-message block shown when a list has nothing in it.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "lucide-react-native@1.34.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/empty-state.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "error-state",
+      "type": "registry:component",
+      "title": "Error State",
+      "description": "The message-plus-retry block shown when a screen fails to load.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "lucide-react-native@1.34.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/button.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/text.json"
+      ],
+      "meta": {
+        "surface": "native"
+      },
+      "files": [
+        {
+          "path": "src/components/error-state.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "web-utils",
+      "type": "registry:lib",
+      "title": "Utils (web)",
+      "description": "The `cn()` class merger every web component uses.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "lib"
+      ],
+      "dependencies": [
+        "clsx@2.1.1",
+        "tailwind-merge@3.6.0"
+      ],
+      "meta": {
+        "surface": "web"
+      },
+      "files": [
+        {
+          "path": "apps/admin/src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "src/lib/utils.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "web-badge",
+      "type": "registry:ui",
+      "title": "Badge (web)",
+      "description": "A small status label. Six variants, sharing the palette's semantics with the native Badge.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "ui",
+        "web"
+      ],
+      "dependencies": [
+        "class-variance-authority@0.7.1",
+        "radix-ui@1.6.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/web-utils.json"
+      ],
+      "meta": {
+        "surface": "web"
+      },
+      "files": [
+        {
+          "path": "apps/admin/src/components/ui/badge.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/badge.tsx"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "web-button",
+      "type": "registry:ui",
+      "title": "Button (web)",
+      "description": "The web Button: same six variants and four sizes as the native one, on Radix's Slot for `asChild`.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "ui",
+        "web"
+      ],
+      "dependencies": [
+        "class-variance-authority@0.7.1",
+        "radix-ui@1.6.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/web-utils.json"
+      ],
+      "meta": {
+        "surface": "web"
+      },
+      "files": [
+        {
+          "path": "apps/admin/src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "web-card",
+      "type": "registry:ui",
+      "title": "Card (web)",
+      "description": "A surface with header, content and footer slots.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "ui",
+        "web"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/web-utils.json"
+      ],
+      "meta": {
+        "surface": "web"
+      },
+      "files": [
+        {
+          "path": "apps/admin/src/components/ui/card.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/card.tsx"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "web-input",
+      "type": "registry:ui",
+      "title": "Input (web)",
+      "description": "A single-line text field, with the shared focus ring and invalid states.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "ui",
+        "web"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/web-utils.json"
+      ],
+      "meta": {
+        "surface": "web"
+      },
+      "files": [
+        {
+          "path": "apps/admin/src/components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/input.tsx"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "web-label",
+      "type": "registry:ui",
+      "title": "Label (web)",
+      "description": "A form label wired to Radix, so clicking it focuses the control.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "ui",
+        "web"
+      ],
+      "dependencies": [
+        "radix-ui@1.6.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/web-utils.json"
+      ],
+      "meta": {
+        "surface": "web"
+      },
+      "files": [
+        {
+          "path": "apps/admin/src/components/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/label.tsx"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "web-select",
+      "type": "registry:ui",
+      "title": "Select (web)",
+      "description": "A Radix select with the palette's popover, item and indicator styling.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "ui",
+        "web"
+      ],
+      "dependencies": [
+        "lucide-react@1.34.0",
+        "radix-ui@1.6.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/web-utils.json"
+      ],
+      "meta": {
+        "surface": "web"
+      },
+      "files": [
+        {
+          "path": "apps/admin/src/components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/select.tsx"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "web-slider",
+      "type": "registry:ui",
+      "title": "Slider (web)",
+      "description": "A Radix slider — track, range and thumb on the shared ring and border tokens.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "ui",
+        "web"
+      ],
+      "dependencies": [
+        "radix-ui@1.6.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/web-utils.json"
+      ],
+      "meta": {
+        "surface": "web"
+      },
+      "files": [
+        {
+          "path": "apps/admin/src/components/ui/slider.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/slider.tsx"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "web-switch",
+      "type": "registry:ui",
+      "title": "Switch (web)",
+      "description": "A Radix switch, using `--primary` for on and `--input` for off.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "ui",
+        "web"
+      ],
+      "dependencies": [
+        "radix-ui@1.6.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/web-utils.json"
+      ],
+      "meta": {
+        "surface": "web"
+      },
+      "files": [
+        {
+          "path": "apps/admin/src/components/ui/switch.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/switch.tsx"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "web-table",
+      "type": "registry:ui",
+      "title": "Table (web)",
+      "description": "A data table's parts: header, body, footer, row, head, cell and caption.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "ui",
+        "web"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/web-utils.json"
+      ],
+      "meta": {
+        "surface": "web"
+      },
+      "files": [
+        {
+          "path": "apps/admin/src/components/ui/table.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/table.tsx"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "web-textarea",
+      "type": "registry:ui",
+      "title": "Textarea (web)",
+      "description": "A multi-line field matching Input's focus and invalid states.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "ui",
+        "web"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/web-utils.json"
+      ],
+      "meta": {
+        "surface": "web"
+      },
+      "files": [
+        {
+          "path": "apps/admin/src/components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "web-alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog (web)",
+      "description": "A Radix alert dialog with the shared overlay, and Button for its actions.",
+      "author": "Alejo Garcia",
+      "categories": [
+        "ui",
+        "web"
+      ],
+      "dependencies": [
+        "radix-ui@1.6.0"
+      ],
+      "registryDependencies": [
+        "https://alejo-garcia.github.io/templapp-registry/r/web-button.json",
+        "https://alejo-garcia.github.io/templapp-registry/r/web-utils.json"
+      ],
+      "meta": {
+        "surface": "web"
+      },
+      "files": [
+        {
+          "path": "apps/admin/src/components/ui/alert-dialog.tsx",
+          "type": "registry:ui",
+          "target": "src/components/ui/alert-dialog.tsx"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "screen",
+  "type": "registry:component",
+  "title": "Screen",
+  "description": "The page wrapper: safe-area insets, scroll and keyboard avoidance in one place.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "layout"
+  ],
+  "dependencies": [
+    "react-native-keyboard-controller@1.21.9",
+    "react-native-safe-area-context@5.7.0"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/screen.tsx",
+      "type": "registry:component",
+      "content": "import type { ReactNode } from 'react';\nimport { View } from 'react-native';\nimport { KeyboardAwareScrollView } from 'react-native-keyboard-controller';\nimport { type Edge, SafeAreaView } from 'react-native-safe-area-context';\n\nimport { cn } from '@/lib/utils';\n\ninterface ScreenProps {\n  children: ReactNode;\n  /** Wrap content in a keyboard-aware scroll view. */\n  scroll?: boolean;\n  edges?: readonly Edge[];\n  className?: string;\n  contentClassName?: string;\n}\n\n/** Standard screen wrapper: safe-area insets, background, padding, optional scroll. */\nexport function Screen({\n  children,\n  scroll = false,\n  edges = ['top', 'bottom'],\n  className,\n  contentClassName,\n}: ScreenProps) {\n  return (\n    <SafeAreaView edges={edges} className={cn('flex-1 bg-background', className)}>\n      {scroll ? (\n        <KeyboardAwareScrollView\n          contentContainerStyle={{ flexGrow: 1 }}\n          keyboardShouldPersistTaps=\"handled\"\n          showsVerticalScrollIndicator={false}\n          bottomOffset={24}\n        >\n          <View className={cn('flex-1 px-4 py-4', contentClassName)}>{children}</View>\n        </KeyboardAwareScrollView>\n      ) : (\n        <View className={cn('flex-1 px-4 py-4', contentClassName)}>{children}</View>\n      )}\n    </SafeAreaView>\n  );\n}\n"
+    }
+  ],
+  "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+  "meta": {
+    "surface": "native"
+  }
+}

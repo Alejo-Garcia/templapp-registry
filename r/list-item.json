@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "list-item",
+  "type": "registry:ui",
+  "title": "List Item",
+  "description": "A settings-style row with an optional leading icon, supporting text and a chevron, mirrored for RTL.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "data-display",
+    "navigation"
+  ],
+  "dependencies": [
+    "lucide-react-native@1.34.0"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/list-item.tsx",
+      "type": "registry:ui",
+      "content": "import { ChevronLeft, ChevronRight, type LucideProps } from 'lucide-react-native';\nimport type { ComponentType, ReactNode } from 'react';\nimport { I18nManager, Pressable, type PressableProps, View } from 'react-native';\n\nimport { cn } from '@/lib/utils';\n\nimport { Icon } from './icon';\nimport { Text } from './text';\n\nexport interface ListItemProps extends PressableProps {\n  title: string;\n  subtitle?: string;\n  icon?: ComponentType<LucideProps>;\n  right?: ReactNode;\n  showChevron?: boolean;\n  className?: string;\n}\n\n/** A tappable settings/list row with optional leading icon, trailing content, chevron. */\nexport function ListItem({\n  title,\n  subtitle,\n  icon,\n  right,\n  showChevron = false,\n  className,\n  ...props\n}: ListItemProps) {\n  return (\n    <Pressable\n      accessibilityRole={props.onPress ? 'button' : undefined}\n      className={cn('min-h-[52px] flex-row items-center gap-3 px-4 py-3', className)}\n      {...props}\n    >\n      {icon ? <Icon as={icon} className=\"text-muted-foreground\" size={20} /> : null}\n      <View className=\"flex-1\">\n        <Text>{title}</Text>\n        {subtitle ? <Text className=\"text-xs text-muted-foreground\">{subtitle}</Text> : null}\n      </View>\n      {right}\n      {showChevron ? (\n        <Icon\n          as={I18nManager.isRTL ? ChevronLeft : ChevronRight}\n          className=\"text-muted-foreground\"\n          size={18}\n        />\n      ) : null}\n    </Pressable>\n  );\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "alert",
+  "type": "registry:ui",
+  "title": "Alert",
+  "description": "Displays a callout for user attention.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "feedback"
+  ],
+  "dependencies": [
+    "lucide-react-native@1.34.0"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/alert.tsx",
+      "type": "registry:ui",
+      "content": "// Vendored from React Native Reusables (nativewind registry), imports rewritten\n// for this project's paths. Treat it as ours now: the registry copies code in,\n// it does not stay a dependency.\nimport type { LucideIcon } from 'lucide-react-native';\nimport * as React from 'react';\nimport { View } from 'react-native';\n\nimport { cn } from '@/lib/utils';\n\nimport { Icon } from './icon';\nimport { Text, TextClassContext } from './text';\n\nfunction Alert({\n  className,\n  variant,\n  children,\n  icon,\n  iconClassName,\n  ...props\n}: React.ComponentProps<typeof View> &\n  React.RefAttributes<View> & {\n    icon: LucideIcon;\n    variant?: 'default' | 'destructive';\n    iconClassName?: string;\n  }) {\n  return (\n    <TextClassContext.Provider\n      value={cn(\n        'text-sm text-foreground',\n        variant === 'destructive' && 'text-destructive',\n        className,\n      )}\n    >\n      <View\n        role=\"alert\"\n        className={cn(\n          'relative w-full rounded-lg border border-border bg-card px-4 pb-2 pt-3.5',\n          className,\n        )}\n        {...props}\n      >\n        <View className=\"absolute left-3.5 top-3\">\n          <Icon\n            as={icon}\n            className={cn('size-4', variant === 'destructive' && 'text-destructive', iconClassName)}\n          />\n        </View>\n        {children}\n      </View>\n    </TextClassContext.Provider>\n  );\n}\n\nfunction AlertTitle({ className, ...props }: React.ComponentProps<typeof Text>) {\n  return (\n    <Text\n      className={cn('mb-1 ml-0.5 min-h-4 pl-6 font-medium leading-none tracking-tight', className)}\n      {...props}\n    />\n  );\n}\n\nfunction AlertDescription({ className, ...props }: React.ComponentProps<typeof Text>) {\n  const textClass = React.useContext(TextClassContext);\n  return (\n    <Text\n      className={cn(\n        'ml-0.5 pb-1.5 pl-6 text-sm leading-relaxed text-muted-foreground',\n        textClass?.includes('text-destructive') && 'text-destructive/90',\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Alert, AlertDescription, AlertTitle };\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

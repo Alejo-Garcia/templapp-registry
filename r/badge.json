@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "type": "registry:ui",
+  "title": "Badge",
+  "description": "Displays a badge or a component that looks like a badge.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "data-display"
+  ],
+  "dependencies": [
+    "@rn-primitives/slot@1.5.2",
+    "class-variance-authority@0.7.1"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/badge.tsx",
+      "type": "registry:ui",
+      "content": "import { Slot } from '@rn-primitives/slot';\nimport { cva, type VariantProps } from 'class-variance-authority';\nimport * as React from 'react';\nimport { Platform, View } from 'react-native';\n\nimport { cn } from '@/lib/utils';\n\nimport { TextClassContext } from './text';\n\nconst badgeVariants = cva(\n  cn(\n    'group shrink-0 flex-row items-center justify-center gap-1 overflow-hidden rounded-full border border-border px-2 py-0.5',\n    Platform.select({\n      web: 'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive w-fit whitespace-nowrap transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 [&>svg]:pointer-events-none [&>svg]:size-3',\n    }),\n  ),\n  {\n    variants: {\n      variant: {\n        default: cn(\n          'border-transparent bg-primary',\n          Platform.select({ web: '[a&]:hover:bg-primary/90' }),\n        ),\n        secondary: cn(\n          'border-transparent bg-secondary',\n          Platform.select({ web: '[a&]:hover:bg-secondary/90' }),\n        ),\n        destructive: cn(\n          'border-transparent bg-destructive',\n          Platform.select({ web: '[a&]:hover:bg-destructive/90' }),\n        ),\n        outline: Platform.select({ web: '[a&]:hover:bg-accent [a&]:hover:text-accent-foreground' }),\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n    },\n  },\n);\n\nconst badgeTextVariants = cva('text-xs font-medium', {\n  variants: {\n    variant: {\n      default: 'text-primary-foreground',\n      secondary: 'text-secondary-foreground',\n      destructive: 'text-white',\n      outline: 'text-foreground',\n    },\n  },\n  defaultVariants: {\n    variant: 'default',\n  },\n});\n\ntype BadgeProps = React.ComponentProps<typeof View> &\n  React.RefAttributes<React.ComponentRef<typeof View>> & {\n    asChild?: boolean;\n  } & VariantProps<typeof badgeVariants>;\n\nfunction Badge({ className, variant, asChild, ...props }: BadgeProps) {\n  const Component = asChild ? Slot : View;\n  return (\n    <TextClassContext.Provider value={badgeTextVariants({ variant })}>\n      <Component className={cn(badgeVariants({ variant }), className)} {...props} />\n    </TextClassContext.Provider>\n  );\n}\n\nexport { Badge, badgeTextVariants, badgeVariants };\nexport type { BadgeProps };\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

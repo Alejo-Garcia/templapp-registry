@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "image",
+  "type": "registry:ui",
+  "title": "Image",
+  "description": "An expo-image wrapper with sane caching, transition and placeholder defaults.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "data-display"
+  ],
+  "dependencies": [
+    "expo-image@57.0.3"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/image.tsx",
+      "type": "registry:ui",
+      "content": "import { Image, type ImageProps } from 'expo-image';\n\nexport type AppImageProps = ImageProps;\n\n/**\n * App-wide image with sensible caching defaults: cached to memory + disk and a\n * short cross-fade in. Import this instead of `expo-image` directly so the cache\n * policy lives in one place. Pass `recyclingKey` (e.g. the item id) in lists so\n * recycled rows don't show a previous image for a frame.\n */\nexport function AppImage({\n  cachePolicy = 'memory-disk',\n  transition = 200,\n  ...props\n}: AppImageProps) {\n  return <Image cachePolicy={cachePolicy} transition={transition} {...props} />;\n}\n"
+    }
+  ],
+  "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+  "meta": {
+    "surface": "native"
+  }
+}

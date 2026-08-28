@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "type": "registry:ui",
+  "title": "Checkbox",
+  "description": "A control that allows the user to toggle between checked and not checked.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "form"
+  ],
+  "dependencies": [
+    "@rn-primitives/checkbox@1.5.2",
+    "lucide-react-native@1.34.0"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/checkbox.tsx",
+      "type": "registry:ui",
+      "content": "import * as CheckboxPrimitive from '@rn-primitives/checkbox';\nimport { Check } from 'lucide-react-native';\nimport * as React from 'react';\nimport { Platform } from 'react-native';\n\nimport { cn } from '@/lib/utils';\n\nimport { Icon } from './icon';\n\nconst DEFAULT_HIT_SLOP = 24;\n\nfunction Checkbox({\n  className,\n  checkedClassName,\n  indicatorClassName,\n  iconClassName,\n  ...props\n}: React.ComponentProps<typeof CheckboxPrimitive.Root> & {\n  checkedClassName?: string;\n  indicatorClassName?: string;\n  iconClassName?: string;\n}) {\n  return (\n    <CheckboxPrimitive.Root\n      className={cn(\n        'size-4 shrink-0 rounded-[4px] border border-input shadow-sm shadow-black/5 dark:bg-input/30',\n        Platform.select({\n          web: 'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive peer cursor-default outline-none transition-shadow focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed',\n          native: 'overflow-hidden',\n        }),\n        props.checked && cn('border-primary', checkedClassName),\n        props.disabled && 'opacity-50',\n        className,\n      )}\n      hitSlop={DEFAULT_HIT_SLOP}\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator\n        className={cn('h-full w-full items-center justify-center bg-primary', indicatorClassName)}\n      >\n        <Icon\n          as={Check}\n          size={12}\n          strokeWidth={Platform.OS === 'web' ? 2.5 : 3.5}\n          className={cn('text-primary-foreground', iconClassName)}\n        />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  );\n}\n\nexport { Checkbox };\nexport type CheckboxProps = React.ComponentProps<typeof Checkbox>;\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

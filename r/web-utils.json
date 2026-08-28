@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "web-utils",
+  "type": "registry:lib",
+  "title": "Utils (web)",
+  "description": "The `cn()` class merger every web component uses.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "lib"
+  ],
+  "dependencies": [
+    "clsx@2.1.1",
+    "tailwind-merge@3.6.0"
+  ],
+  "files": [
+    {
+      "path": "apps/admin/src/lib/utils.ts",
+      "type": "registry:lib",
+      "target": "src/lib/utils.ts",
+      "content": "import type { ClassValue } from 'clsx'\nimport { clsx } from 'clsx'\nimport { twMerge } from 'tailwind-merge'\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "web"
+  }
+}

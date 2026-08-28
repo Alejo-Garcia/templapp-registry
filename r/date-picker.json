@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "date-picker",
+  "type": "registry:ui",
+  "title": "Date Picker",
+  "description": "A field that opens a calendar in a bottom sheet and formats the chosen date for the active locale.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "date",
+    "form"
+  ],
+  "dependencies": [
+    "date-fns@4.4.0",
+    "lucide-react-native@1.34.0"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/bottom-sheet.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/calendar.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/date-picker.tsx",
+      "type": "registry:ui",
+      "content": "import type { Locale } from 'date-fns';\nimport { format } from 'date-fns';\nimport { enUS } from 'date-fns/locale';\nimport { Calendar as CalendarIcon } from 'lucide-react-native';\nimport { useRef } from 'react';\nimport { Pressable, View } from 'react-native';\n\nimport { cn } from '@/lib/utils';\n\nimport { AppBottomSheet, type AppBottomSheetRef } from './bottom-sheet';\nimport { Calendar, type CalendarLabels } from './calendar';\nimport { Icon } from './icon';\nimport { Text } from './text';\n\nexport interface DatePickerProps {\n  value?: Date;\n  onChange: (date: Date) => void;\n  placeholder?: string;\n  /** date-fns format token for the trigger label (default `PP`, e.g. \"Jun 25, 2026\"). */\n  displayFormat?: string;\n  minDate?: Date;\n  maxDate?: Date;\n  /** date-fns locale for the label + calendar. Pass `useDateFnsLocale()`. */\n  locale?: Locale;\n  weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;\n  /** Calendar accessibility labels (localize via your i18n layer). */\n  calendarLabels?: Partial<CalendarLabels>;\n  disabled?: boolean;\n  error?: boolean;\n  className?: string;\n}\n\n/** Date field that opens a calendar in a bottom sheet. */\nexport function DatePicker({\n  value,\n  onChange,\n  placeholder = 'Select a date',\n  displayFormat = 'PP',\n  minDate,\n  maxDate,\n  locale = enUS,\n  weekStartsOn,\n  calendarLabels,\n  disabled,\n  error,\n  className,\n}: DatePickerProps) {\n  const sheet = useRef<AppBottomSheetRef>(null);\n  const label = value ? format(value, displayFormat, { locale }) : placeholder;\n\n  return (\n    <>\n      <Pressable\n        accessibilityRole=\"button\"\n        accessibilityState={{ disabled: Boolean(disabled) }}\n        accessibilityLabel={label}\n        disabled={disabled}\n        onPress={() => sheet.current?.present()}\n        className={cn(\n          'h-12 flex-row items-center justify-between rounded-lg border border-input bg-background px-4',\n          error && 'border-destructive',\n          disabled && 'opacity-50',\n          className,\n        )}\n      >\n        <Text className={cn('flex-1', !value && 'text-muted-foreground')} numberOfLines={1}>\n          {label}\n        </Text>\n        <Icon as={CalendarIcon} size={18} className=\"text-muted-foreground\" />\n      </Pressable>\n\n      <AppBottomSheet ref={sheet}>\n        <View className=\"px-4 pt-2\">\n          <Calendar\n            value={value}\n            // Open on a month that has selectable days even when value is unset.\n            initialMonth={value ?? minDate ?? maxDate}\n            minDate={minDate}\n            maxDate={maxDate}\n            locale={locale}\n            weekStartsOn={weekStartsOn}\n            labels={calendarLabels}\n            onChange={(date) => {\n              onChange(date);\n              sheet.current?.dismiss();\n            }}\n          />\n        </View>\n      </AppBottomSheet>\n    </>\n  );\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

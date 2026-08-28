@@ -1,0 +1,53 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme",
+  "type": "registry:lib",
+  "title": "Theme",
+  "description": "The resolved palette and colour-scheme hooks, for the places that take a colour value instead of a class name — React Navigation, status bar, native props.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "theme",
+    "lib"
+  ],
+  "dependencies": [
+    "@expo-google-fonts/inter@0.4.2",
+    "expo-router@57.0.17",
+    "nativewind@4.2.6"
+  ],
+  "files": [
+    {
+      "path": "src/theme/colors.ts",
+      "type": "registry:file",
+      "target": "src/theme/colors.ts",
+      "content": "/**\n * Imperative color palette for places where NativeWind classes can't reach:\n * native props (placeholderTextColor, ActivityIndicator), icon colors, the\n * React Navigation theme.\n *\n * This is a SECOND COPY of the tokens in `global.css`, and that is the whole\n * problem with it: this file used to say it was \"kept in sync\" by hand, and it\n * silently was not — the palette was re-themed to React Native Reusables' values\n * and this file kept the old blue, so every screen went neutral while the tab bar\n * stayed blue. Nothing failed; you had to look at the app to see it.\n *\n * `colors.test.ts` now derives these values from `global.css` and fails when the\n * two disagree, so the claim above is checked rather than asserted.\n *\n * Values are RNR's tokens converted from HSL. Do not hand-edit: change\n * `global.css` and let the test tell you what these should become.\n */\nexport const palette = {\n  light: {\n    background: '#FFFFFF', // --background: 0 0% 100%\n    card: '#FFFFFF', // --card: 0 0% 100%\n    foreground: '#0A0A0A', // --foreground: 0 0% 3.9%\n    mutedForeground: '#737373', // --muted-foreground: 0 0% 45.1%\n    primary: '#171717', // --primary: 0 0% 9%\n    primaryForeground: '#FAFAFA', // --primary-foreground: 0 0% 98%\n    border: '#E5E5E5', // --border: 0 0% 89.8%\n    destructive: '#EF4444', // --destructive: 0 84.2% 60.2%\n  },\n  dark: {\n    background: '#0A0A0A', // --background: 0 0% 3.9%\n    card: '#0A0A0A', // --card: 0 0% 3.9%  (RNR gives cards a border, not a fill)\n    foreground: '#FAFAFA', // --foreground: 0 0% 98%\n    mutedForeground: '#A3A3A3', // --muted-foreground: 0 0% 63.9%\n    primary: '#FAFAFA', // --primary: 0 0% 98%\n    primaryForeground: '#171717', // --primary-foreground: 0 0% 9%\n    border: '#262626', // --border: 0 0% 14.9%\n    destructive: '#E14E4E', // --destructive: 0 70.9% 59.4%\n  },\n} as const;\n\nexport type ThemeColors = Record<keyof (typeof palette)['light'], string>;\n"
+    },
+    {
+      "path": "src/theme/use-color-scheme.ts",
+      "type": "registry:file",
+      "target": "src/theme/use-color-scheme.ts",
+      "content": "import { useColorScheme as useNativewindColorScheme } from 'nativewind';\n\nimport { palette, type ThemeColors } from './colors';\n\n/** Effective (resolved) color scheme + helpers. */\nexport function useColorScheme() {\n  const { colorScheme, setColorScheme, toggleColorScheme } = useNativewindColorScheme();\n  const resolved = colorScheme ?? 'light';\n  return {\n    colorScheme: resolved,\n    isDark: resolved === 'dark',\n    setColorScheme,\n    toggleColorScheme,\n  };\n}\n\n/** Resolved palette for the current scheme (for native props / icons). */\nexport function useThemeColors(): ThemeColors {\n  const { isDark } = useColorScheme();\n  return isDark ? palette.dark : palette.light;\n}\n"
+    },
+    {
+      "path": "src/theme/navigation.ts",
+      "type": "registry:file",
+      "target": "src/theme/navigation.ts",
+      "content": "import { DarkTheme, DefaultTheme } from 'expo-router';\n\nimport { palette } from './colors';\n\n/** React Navigation themes used by Expo Router's `ThemeProvider`. */\nexport const navLightTheme = {\n  ...DefaultTheme,\n  colors: {\n    ...DefaultTheme.colors,\n    primary: palette.light.primary,\n    background: palette.light.background,\n    card: palette.light.card,\n    text: palette.light.foreground,\n    border: palette.light.border,\n    notification: palette.light.primary,\n  },\n};\n\nexport const navDarkTheme = {\n  ...DarkTheme,\n  colors: {\n    ...DarkTheme.colors,\n    primary: palette.dark.primary,\n    background: palette.dark.background,\n    card: palette.dark.card,\n    text: palette.dark.foreground,\n    border: palette.dark.border,\n    notification: palette.dark.primary,\n  },\n};\n"
+    },
+    {
+      "path": "src/theme/fonts.ts",
+      "type": "registry:file",
+      "target": "src/theme/fonts.ts",
+      "content": "import {\n  Inter_400Regular,\n  Inter_500Medium,\n  Inter_600SemiBold,\n  Inter_700Bold,\n  Inter_800ExtraBold,\n  useFonts,\n} from '@expo-google-fonts/inter';\n\n/**\n * Custom fonts loaded at runtime. Inter is wired up as the example family; swap\n * in your own by installing another `@expo-google-fonts/*` package (or dropping\n * `.ttf` files into `assets/fonts/` and `require()`-ing them here), then point\n * `fontFamily.sans` at the regular face in `tailwind.config.js` and rewrite the\n * face names in `plugins/interFontPlugin.js`.\n *\n * Use them through the ordinary Tailwind weight utilities — `font-medium`,\n * `font-semibold`, `font-bold` — never a bespoke `font-<family>` class. The\n * plugin turns those weights into these face names on native.\n *\n * Every face here has to be referenced by the plugin and vice versa: a face\n * loaded but never mapped is dead bundle weight, and a face mapped but never\n * loaded falls back to the system font without any error.\n */\nexport const fontMap = {\n  Inter_400Regular,\n  Inter_500Medium,\n  Inter_600SemiBold,\n  Inter_700Bold,\n  Inter_800ExtraBold,\n};\n\n/**\n * Loads the app fonts. Returns `true` once they're ready (or failed — we don't\n * block the splash screen forever on a font error). Call it where the splash is\n * gated (see `app/_layout.tsx`).\n */\nexport function useAppFonts(): boolean {\n  const [loaded, error] = useFonts(fontMap);\n  return loaded || error != null;\n}\n"
+    },
+    {
+      "path": "src/theme/index.ts",
+      "type": "registry:file",
+      "target": "src/theme/index.ts",
+      "content": "// Trimmed for the registry: theme-provider is coupled to templapp's\n// app layer, and ships with the template rather than with this item.\nexport { useColorScheme, useThemeColors } from './use-color-scheme';\nexport { useAppFonts, fontMap } from './fonts';\nexport { palette, type ThemeColors } from './colors';\nexport { navLightTheme, navDarkTheme } from './navigation';\n"
+    }
+  ],
+  "docs": "`colors.ts` is a second copy of the tokens in hex, because React Navigation and native props take resolved colours rather than class names. templapp keeps the two honest with `src/theme/colors.test.ts`, which parses global.css and converts each token — copy that test too, or the palette will drift the first time you re-theme.\n\nThis item deliberately omits `theme-provider.tsx`: it reads the persisted colour-scheme preference from templapp's `@/data` store, so it only makes sense inside templapp.\n\nRun `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+  "meta": {
+    "surface": "native"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-reduced-motion",
+  "type": "registry:hook",
+  "title": "useReducedMotion",
+  "description": "Tracks the OS \"Reduce Motion\" setting so non-essential animation can be gated on it.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "hook",
+    "accessibility"
+  ],
+  "files": [
+    {
+      "path": "src/lib/hooks/use-reduced-motion.ts",
+      "type": "registry:hook",
+      "content": "import { useEffect, useState } from 'react';\nimport { AccessibilityInfo } from 'react-native';\n\n/**\n * Tracks the OS \"Reduce Motion\" accessibility setting. Gate non-essential\n * animations on it (e.g. the Skeleton pulse) so motion-sensitive users get a\n * still UI. Updates live if the setting is toggled.\n */\nexport function useReducedMotion(): boolean {\n  const [reduced, setReduced] = useState(false);\n\n  useEffect(() => {\n    let mounted = true;\n    void AccessibilityInfo.isReduceMotionEnabled().then((value) => {\n      if (mounted) setReduced(value);\n    });\n    const sub = AccessibilityInfo.addEventListener('reduceMotionChanged', setReduced);\n    return () => {\n      mounted = false;\n      sub.remove();\n    };\n  }, []);\n\n  return reduced;\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

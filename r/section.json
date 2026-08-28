@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "section",
+  "type": "registry:component",
+  "title": "Section",
+  "description": "A titled group of rows or fields, with the spacing screens are laid out on.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "layout"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/section.tsx",
+      "type": "registry:component",
+      "content": "import type { ReactNode } from 'react';\nimport { View } from 'react-native';\n\nimport { Text } from '@/components/ui/text';\nimport { cn } from '@/lib/utils';\n\n/** Grouped, card-style section used in settings/profile lists. */\nexport function Section({\n  title,\n  children,\n  className,\n}: {\n  title?: string;\n  children: ReactNode;\n  className?: string;\n}) {\n  return (\n    <View className={cn('gap-2', className)}>\n      {title ? (\n        <Text className=\"px-1 text-xs uppercase tracking-wide text-muted-foreground\">{title}</Text>\n      ) : null}\n      <View className=\"overflow-hidden rounded-xl border border-border bg-card\">{children}</View>\n    </View>\n  );\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

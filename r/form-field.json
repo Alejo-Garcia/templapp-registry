@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "form-field",
+  "type": "registry:component",
+  "title": "Form Field",
+  "description": "Binds an Input to react-hook-form: label, value, error message and accessibility wiring.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "form"
+  ],
+  "dependencies": [
+    "react-hook-form@7.86.0"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/input.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/label.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/form-field.tsx",
+      "type": "registry:component",
+      "content": "import { type Control, Controller, type FieldValues, type Path } from 'react-hook-form';\nimport { View } from 'react-native';\n\nimport { Input, type InputProps } from '@/components/ui/input';\nimport { Label } from '@/components/ui/label';\nimport { Text } from '@/components/ui/text';\nimport { cn } from '@/lib/utils';\n\ninterface FormFieldProps<T extends FieldValues> extends Omit<\n  InputProps,\n  'value' | 'onChangeText' | 'onBlur'\n> {\n  control: Control<T>;\n  name: Path<T>;\n  label?: string;\n}\n\n/** Controlled text input wired to react-hook-form, with label + inline error. */\nexport function FormField<T extends FieldValues>({\n  control,\n  name,\n  label,\n  ...inputProps\n}: FormFieldProps<T>) {\n  return (\n    <View className=\"gap-1.5\">\n      {label ? <Label>{label}</Label> : null}\n      <Controller\n        control={control}\n        name={name}\n        render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (\n          <>\n            <Input\n              value={(value as string) ?? ''}\n              onChangeText={onChange}\n              onBlur={onBlur}\n              accessibilityLabel={label}\n              {...inputProps}\n              // RNR's Input has no `error` prop: it marks invalid state with\n              // `aria-invalid`, which only styles on web. On native the border has\n              // to be a class, so the invalid look lives here rather than in the\n              // component. Last in the merge so it wins over any caller className.\n              className={cn(inputProps.className, error && 'border-destructive')}\n            />\n            {error?.message ? (\n              <Text className=\"text-sm text-destructive\">{error.message}</Text>\n            ) : null}\n          </>\n        )}\n      />\n    </View>\n  );\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

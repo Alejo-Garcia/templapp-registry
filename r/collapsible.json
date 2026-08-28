@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible",
+  "type": "registry:ui",
+  "title": "Collapsible",
+  "description": "An interactive component that expands and collapses a panel of content.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "disclosure"
+  ],
+  "dependencies": [
+    "@rn-primitives/collapsible@1.5.2"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/collapsible.tsx",
+      "type": "registry:ui",
+      "content": "import * as CollapsiblePrimitive from '@rn-primitives/collapsible';\n\nconst Collapsible = CollapsiblePrimitive.Root;\n\nconst CollapsibleTrigger = CollapsiblePrimitive.Trigger;\n\nconst CollapsibleContent = CollapsiblePrimitive.Content;\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent };\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

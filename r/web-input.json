@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "web-input",
+  "type": "registry:ui",
+  "title": "Input (web)",
+  "description": "A single-line text field, with the shared focus ring and invalid states.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "ui",
+    "web"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/web-utils.json"
+  ],
+  "files": [
+    {
+      "path": "apps/admin/src/components/ui/input.tsx",
+      "type": "registry:ui",
+      "target": "src/components/ui/input.tsx",
+      "content": "import * as React from 'react'\n\nimport { cn } from '#/lib/utils.ts'\n\nfunction Input({ className, type, ...props }: React.ComponentProps<'input'>) {\n  return (\n    <input\n      type={type}\n      data-slot=\"input\"\n      className={cn(\n        'h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:bg-input/30',\n        'focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50',\n        'aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Input }\n"
+    }
+  ],
+  "meta": {
+    "surface": "web"
+  }
+}

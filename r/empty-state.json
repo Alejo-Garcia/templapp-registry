@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-state",
+  "type": "registry:component",
+  "title": "Empty State",
+  "description": "The illustration-plus-message block shown when a list has nothing in it.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "feedback"
+  ],
+  "dependencies": [
+    "lucide-react-native@1.34.0"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/text.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/empty-state.tsx",
+      "type": "registry:component",
+      "content": "import { Inbox, type LucideProps } from 'lucide-react-native';\nimport type { ComponentType, ReactNode } from 'react';\nimport { View } from 'react-native';\n\nimport { Icon } from '@/components/ui/icon';\nimport { Text } from '@/components/ui/text';\n\nexport function EmptyState({\n  title,\n  description,\n  icon = Inbox,\n  action,\n}: {\n  title: string;\n  description?: string;\n  icon?: ComponentType<LucideProps>;\n  action?: ReactNode;\n}) {\n  return (\n    <View className=\"flex-1 items-center justify-center gap-3 px-8 py-12\">\n      <Icon as={icon} className=\"text-muted-foreground\" size={40} />\n      <Text className=\"text-center text-xl font-semibold\">{title}</Text>\n      {description ? (\n        <Text variant=\"muted\" className=\"text-center\">\n          {description}\n        </Text>\n      ) : null}\n      {action}\n    </View>\n  );\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

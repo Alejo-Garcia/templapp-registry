@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-spinner",
+  "type": "registry:ui",
+  "title": "Button Spinner",
+  "description": "The spinner for a busy Button. Takes its colour from the Button's own text context, so it always matches the label.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "feedback",
+    "form"
+  ],
+  "dependencies": [
+    "lucide-react-native@1.34.0"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/icon.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/button-spinner.tsx",
+      "type": "registry:ui",
+      "content": "import { Loader2 } from 'lucide-react-native';\nimport * as React from 'react';\nimport { View } from 'react-native';\n\nimport { cn } from '@/lib/utils';\n\nimport { Icon } from './icon';\nimport { TextClassContext } from './text';\n\n/**\n * The spinner that goes inside a busy Button.\n *\n * RNR's Button has no `loading` prop — the pattern is to disable it and compose\n * a spinner beside the label. Written out at each call site that meant picking\n * the spinner's colour by hand, and fifteen call sites picked\n * `text-primary-foreground` or `text-foreground` from memory. It works for every\n * variant except `destructive`, whose label is `text-white`: in dark mode\n * `--primary-foreground` is near-black, so the spinner came out invisible next\n * to a white label.\n *\n * So it takes no colour. It reads the same `TextClassContext` the Button sets\n * for its label, which makes matching the label the only thing it can do.\n */\nexport function ButtonSpinner({ className }: { className?: string }) {\n  const textClass = React.useContext(TextClassContext);\n  return (\n    <View className=\"pointer-events-none animate-spin\">\n      <Icon as={Loader2} className={cn(textClass ?? 'text-foreground', className)} />\n    </View>\n  );\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

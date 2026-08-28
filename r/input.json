@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input",
+  "type": "registry:ui",
+  "title": "Input",
+  "description": "Displays a form input field or a component that looks like an input field.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "form"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/input.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport { Platform, TextInput } from 'react-native';\n\nimport { cn } from '@/lib/utils';\n\nfunction Input({\n  className,\n  // See the note on Text — same cap, same reason. The field is `h-10`, so\n  // unbounded scaling clips what the user is typing.\n  maxFontSizeMultiplier = 1.6,\n  ...props\n}: React.ComponentProps<typeof TextInput> &\n  React.RefAttributes<React.ComponentRef<typeof TextInput>>) {\n  return (\n    <TextInput\n      className={cn(\n        'flex h-10 w-full min-w-0 flex-row items-center rounded-md border border-input bg-background px-3 py-1 text-base leading-5 text-foreground shadow-sm shadow-black/5 dark:bg-input/30 sm:h-9',\n        props.editable === false &&\n          cn(\n            'opacity-50',\n            Platform.select({ web: 'disabled:pointer-events-none disabled:cursor-not-allowed' }),\n          ),\n        Platform.select({\n          web: cn(\n            'outline-none transition-[color,box-shadow] selection:bg-primary selection:text-primary-foreground placeholder:text-muted-foreground md:text-sm',\n            'focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50',\n            'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',\n          ),\n          native: 'placeholder:text-muted-foreground/50',\n        }),\n        className,\n      )}\n      maxFontSizeMultiplier={maxFontSizeMultiplier}\n      {...props}\n    />\n  );\n}\n\nexport { Input };\nexport type InputProps = React.ComponentProps<typeof Input>;\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

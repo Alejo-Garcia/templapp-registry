@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "type": "registry:ui",
+  "title": "Switch",
+  "description": "A control that allows the user to toggle between checked and not checked.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "form"
+  ],
+  "dependencies": [
+    "@rn-primitives/switch@1.5.2"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/switch.tsx",
+      "type": "registry:ui",
+      "content": "import * as SwitchPrimitives from '@rn-primitives/switch';\nimport * as React from 'react';\nimport { Platform } from 'react-native';\n\nimport { cn } from '@/lib/utils';\n\n// Matches the value RNR already uses on Checkbox.\nconst DEFAULT_HIT_SLOP = 24;\n\n// The drawn switch is 32x18pt — iOS's native one is 51x31 — and RNR sets no\n// hitSlop on it. Same reasoning as radio-group: touch area only, no visual change.\nfunction Switch({ className, ...props }: React.ComponentProps<typeof SwitchPrimitives.Root>) {\n  return (\n    <SwitchPrimitives.Root\n      className={cn(\n        'flex h-[1.15rem] w-8 shrink-0 flex-row items-center rounded-full border border-transparent shadow-sm shadow-black/5',\n        Platform.select({\n          web: 'peer inline-flex outline-none transition-all focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed',\n        }),\n        props.checked ? 'bg-primary' : 'bg-input dark:bg-input/80',\n        props.disabled && 'opacity-50',\n        className,\n      )}\n      hitSlop={DEFAULT_HIT_SLOP}\n      {...props}\n    >\n      <SwitchPrimitives.Thumb\n        className={cn(\n          'size-4 rounded-full bg-background transition-transform',\n          Platform.select({ web: 'pointer-events-none block ring-0' }),\n          props.checked\n            ? 'translate-x-3.5 dark:bg-primary-foreground'\n            : 'translate-x-0 dark:bg-foreground',\n        )}\n      />\n    </SwitchPrimitives.Root>\n  );\n}\n\nexport { Switch };\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}

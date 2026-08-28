@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "native-only-animated-view",
+  "type": "registry:ui",
+  "title": "Native Only Animated View",
+  "description": "A component that is only rendered and animated on native platforms.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "layout"
+  ],
+  "dependencies": [
+    "react-native-reanimated@4.5.1"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/native-only-animated-view.tsx",
+      "type": "registry:ui",
+      "content": "// Vendored from React Native Reusables (nativewind registry), imports rewritten\n// for this project's paths. Treat it as ours now: the registry copies code in,\n// it does not stay a dependency.\nimport { Platform, Pressable } from 'react-native';\nimport Animated from 'react-native-reanimated';\n\nconst AnimatedPressable = Animated.createAnimatedComponent(Pressable);\n\n/**\n * This component is used to wrap animated views that should only be animated on native.\n * @param props - The props for the animated view.\n * @returns The animated view if the platform is native, otherwise the children.\n * @example\n * <NativeOnlyAnimatedView entering={FadeIn} exiting={FadeOut}>\n *   <Text>I am only animated on native</Text>\n * </NativeOnlyAnimatedView>\n */\nfunction NativeOnlyAnimatedView(\n  props:\n    | (React.ComponentProps<typeof Animated.View> &\n        React.RefAttributes<typeof Animated.View> & { as?: 'View' })\n    | (React.ComponentProps<typeof AnimatedPressable> &\n        React.RefAttributes<typeof AnimatedPressable> & { as: 'Pressable' }),\n) {\n  if (Platform.OS === 'web') {\n    return <>{props.children as React.ReactNode}</>;\n  } else {\n    if (props.as === 'Pressable') {\n      return <AnimatedPressable {...props} />;\n    }\n    return <Animated.View {...props} />;\n  }\n}\n\nexport { NativeOnlyAnimatedView };\n"
+    }
+  ],
+  "docs": "Run `npx expo install --fix` — the CLI writes caret ranges, which resolve ahead of your Expo SDK matrix.",
+  "meta": {
+    "surface": "native"
+  }
+}

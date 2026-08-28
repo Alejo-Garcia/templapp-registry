@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card",
+  "type": "registry:ui",
+  "title": "Card",
+  "description": "Displays a card with header, content, and footer.",
+  "author": "Alejo Garcia",
+  "categories": [
+    "layout"
+  ],
+  "registryDependencies": [
+    "https://alejo-garcia.github.io/templapp-registry/r/text.json",
+    "https://alejo-garcia.github.io/templapp-registry/r/utils.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/card.tsx",
+      "type": "registry:ui",
+      "content": "import { View, type ViewProps } from 'react-native';\n\nimport { cn } from '@/lib/utils';\n\nimport { Text, type TextProps } from './text';\n\ntype DivProps = ViewProps & { className?: string };\n\nexport function Card({ className, ...props }: DivProps) {\n  return (\n    <View className={cn('rounded-xl border border-border bg-card p-4', className)} {...props} />\n  );\n}\n\nexport function CardHeader({ className, ...props }: DivProps) {\n  return <View className={cn('mb-3 gap-1', className)} {...props} />;\n}\n\nexport function CardTitle({ ...props }: TextProps) {\n  return <Text className=\"text-xl font-semibold\" {...props} />;\n}\n\nexport function CardDescription({ ...props }: TextProps) {\n  return <Text variant=\"muted\" {...props} />;\n}\n\nexport function CardContent({ className, ...props }: DivProps) {\n  return <View className={cn('gap-2', className)} {...props} />;\n}\n\nexport function CardFooter({ className, ...props }: DivProps) {\n  return <View className={cn('mt-4 flex-row items-center gap-2', className)} {...props} />;\n}\n"
+    }
+  ],
+  "meta": {
+    "surface": "native"
+  }
+}
